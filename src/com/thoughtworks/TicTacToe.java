@@ -16,6 +16,10 @@ public class TicTacToe {
 
     public void start() {
         initializeBoard();
+        play();
+    }
+
+    public void play() {
         int playerNum = 1;
         while(playerNum < 3) {
             if(playerNum%2 == 1)
@@ -32,14 +36,6 @@ public class TicTacToe {
         drawBoard();
     }
 
-    public void drawBoard() {
-        out.println(" " + board[0] + " | " + board[1] + " | " + board[2] + " \n" +
-                    "-----------\n" +
-                    " " + board[3] + " | " + board[4] + " | " + board[5] + " \n" +
-                    "-----------\n" +
-                    " " + board[6] + " | " + board[7] + " | " + board[8] + " ");
-    }
-
     public int getUserInput(String player) {
         int inputNum = 0;
         try {
@@ -48,8 +44,23 @@ public class TicTacToe {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        board[inputNum-1] = player;
-        drawBoard();
+        if(board[inputNum-1].equals(" ")) {
+            board[inputNum - 1] = player;
+            drawBoard();
+        }
+        else {
+            out.println("Location already taken");
+            getUserInput(player);
+        }
+
         return inputNum;
+    }
+
+    public void drawBoard() {
+        out.println(" " + board[0] + " | " + board[1] + " | " + board[2] + " \n" +
+                "-----------\n" +
+                " " + board[3] + " | " + board[4] + " | " + board[5] + " \n" +
+                "-----------\n" +
+                " " + board[6] + " | " + board[7] + " | " + board[8] + " ");
     }
 }

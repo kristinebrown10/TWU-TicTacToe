@@ -59,4 +59,11 @@ public class TicTacToeTest {
                                         "-----------\n" +
                                         "   |   |   ");
     }
+
+    @Test
+    public void shouldDisplayErrorMessageWhenPlayerTriesToPlayInTakenCell() {
+        TicTacToe takenCellGame = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5\n5\n4")));
+        takenCellGame.start();
+        verify(mockPrintStream).println("Location already taken");
+    }
 }
