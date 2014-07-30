@@ -46,7 +46,7 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldDisplayErrorMessageWhenPlayerTriesToPlayInTakenCell() {
+    public void shouldReturnErrorMessageWhenPlayerTriesToPlayInTakenCell() {
         board.fillCell(5);
         assertEquals(board.fillCell(5), "Location already taken");
     }
@@ -63,5 +63,16 @@ public class BoardTest {
         board.fillCell(8);
         assertThat(board.fillCell(9), CoreMatchers.containsString("Game is a draw"));
         assertThat(board.checkIfGameIsOver(), is(true));
+    }
+
+    @Test
+    public void shouldDisplayMessageWhenPlayerGetsThreeInARow() {
+        board.fillCell(1);
+        board.fillCell(9);
+        board.fillCell(2);
+        board.fillCell(5);
+        board.fillCell(3);
+        assertEquals(board.drawSelf(), "Player " + board.getCurrentPlayer() + " Wins!");
+        assertEquals(board.checkIfGameIsWon(), is(true));
     }
 }

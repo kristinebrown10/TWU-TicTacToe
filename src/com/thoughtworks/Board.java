@@ -3,6 +3,7 @@ package com.thoughtworks;
 public class Board {
     private String[] cells = new String[9];
     private boolean xTurn;
+    private int currentPlayer;
 
     public Board() {
         for(int i = 0; i < 9; i++) {
@@ -45,5 +46,16 @@ public class Board {
             }
         }
         return gameOver;
+    }
+
+    public boolean checkIfGameIsWon() {
+        boolean threeInARow = false;
+
+        return threeInARow;
+    }
+
+    public int getCurrentPlayer() {
+        if(xTurn) return 1;
+        return 2;
     }
 }

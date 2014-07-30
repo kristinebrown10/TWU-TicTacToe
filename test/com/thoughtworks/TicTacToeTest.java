@@ -28,10 +28,10 @@ public class TicTacToeTest {
     public void shouldDrawBoardWhenProgramStarts() {
         game.start();
         verify(mockPrintStream, atLeast(1)).println("   |   |   \n" +
-                                        "-----------\n" +
-                                        "   |   |   \n" +
-                                        "-----------\n" +
-                                        "   |   |   ");
+                                                    "-----------\n" +
+                                                    "   |   |   \n" +
+                                                    "-----------\n" +
+                                                    "   |   |   ");
     }
 
     @Test
@@ -42,7 +42,6 @@ public class TicTacToeTest {
     @Test
     public void shouldRedrawBoardWhenUserEntersNumber() {
         game.getUserInput();
-        //game.drawBoard();
         verify(mockPrintStream).println("   |   |   \n" +
                                         "-----------\n" +
                                         "   | X |   \n" +
@@ -51,7 +50,9 @@ public class TicTacToeTest {
     }
 
 //    @Test
-//    public void shouldStopGameWhenAllCellsAreFilled() {
+//    public void shouldPrintMessageWhenAllCellsAreFilled() {
 //        TicTacToe fullGame = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("1\n2\n3\n4\n5\n6\n7\n8\n9")));
+//        fullGame.start();
+//        verify(mockPrintStream).println("Game is a draw");
 //    }
 }
