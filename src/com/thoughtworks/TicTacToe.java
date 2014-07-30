@@ -7,6 +7,7 @@ import java.io.PrintStream;
 public class TicTacToe {
     PrintStream out;
     BufferedReader reader;
+    String[] board = {" "," "," "," "," "," "," "," "," "};
 
     public TicTacToe(PrintStream out, BufferedReader reader) {
         this.out = out;
@@ -19,11 +20,11 @@ public class TicTacToe {
     }
 
     public void drawBoard() {
-        out.println("   |   |   \n" +
+        out.println(" " + board[0] + " | " + board[1] + " | " + board[2] + " \n" +
                     "-----------\n" +
-                    "   |   |   \n" +
+                    " " + board[3] + " | " + board[4] + " | " + board[5] + " \n" +
                     "-----------\n" +
-                    "   |   |   ");
+                    " " + board[6] + " | " + board[7] + " | " + board[8] + " ");
     }
 
     public int getUserInput() {
@@ -34,6 +35,8 @@ public class TicTacToe {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        board[inputNum-1] = "X";
+        drawBoard();
         return inputNum;
     }
 }

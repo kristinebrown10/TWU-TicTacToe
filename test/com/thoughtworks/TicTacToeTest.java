@@ -25,7 +25,7 @@ public class TicTacToeTest {
 
     @Test
     public void shouldDrawBoardWhenProgramStarts() {
-        game.drawBoard();
+        game.start();
         verify(mockPrintStream).println("   |   |   \n" +
                                         "-----------\n" +
                                         "   |   |   \n" +
@@ -37,18 +37,14 @@ public class TicTacToeTest {
     public void shouldGetUserInput() {
         assertThat(game.getUserInput(), is(5));
     }
-//    @Test
-//    public void shouldRedrawBoardWhenUserEntersNumber() {
-//        //Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("2\n1")));
-//        PrintStream mockPrintStream = mock(PrintStream.class);
-//        TicTacToe game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5")));
-//        game.drawBoard();
-//        game.getUserInput();
-//        game.drawBoard();
-//        verify(mockPrintStream).println("   |   |   \n" +
-//                                        "-----------\n" +
-//                                        "   | X |   \n" +
-//                                        "-----------\n" +
-//                                        "   |   |   ");
-//    }
+
+    @Test
+    public void shouldRedrawBoardWhenUserEntersNumber() {
+        game.getUserInput();
+        verify(mockPrintStream).println("   |   |   \n" +
+                                        "-----------\n" +
+                                        "   | X |   \n" +
+                                        "-----------\n" +
+                                        "   |   |   ");
+    }
 }
