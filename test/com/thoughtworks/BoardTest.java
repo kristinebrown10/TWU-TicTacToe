@@ -40,4 +40,23 @@ public class BoardTest {
                                                     "   |   |   ");
     }
 
+    @Test
+    public void shouldRedrawBoardWhenPlayer2EntersNumber() {
+        board.fillCell(5);
+        board.fillCell(2);
+        board.drawSelf();
+        verify(mockPrintStream).println("   | O |   \n" +
+                "-----------\n" +
+                "   | X |   \n" +
+                "-----------\n" +
+                "   |   |   ");
+    }
+
+    @Test
+    public void shouldDisplayErrorMessageWhenPlayerTriesToPlayInTakenCell() {
+        board.fillCell(5);
+        board.fillCell(5);
+        verify(mockPrintStream).println("Location already taken");
+    }
+
 }

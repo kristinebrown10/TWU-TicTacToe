@@ -24,11 +24,15 @@ public class Board {
     }
 
     public void fillCell(int playerMove) {
-        if(xTurn) {
-            cells[playerMove - 1] = "X";
+        if(cells[playerMove-1].equals(" ")) {
+            if (xTurn) {
+                cells[playerMove - 1] = "X";
+            } else {
+                cells[playerMove - 1] = "O";
+            }
+            xTurn = !xTurn;
         }
-        else {
-            cells[playerMove - 1] = "O";
-        }
+        else
+            out.println("Location already taken");
     }
 }

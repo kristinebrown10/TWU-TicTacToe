@@ -22,7 +22,6 @@ public class TicTacToeTest {
     public void setUp() throws Exception {
         mockPrintStream = mock(PrintStream.class);
         game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5\n2")));
-        game.initializeBoard();
     }
 
     @Test
@@ -37,12 +36,13 @@ public class TicTacToeTest {
 
     @Test
     public void shouldGetUserInput() {
-        assertThat(game.getUserInput("O"), is(5));
+        assertThat(game.getUserInput(), is(5));
     }
 
     @Test
     public void shouldRedrawBoardWhenUserEntersNumber() {
-        game.getUserInput("X");
+        game.getUserInput();
+        game.drawBoard();
         verify(mockPrintStream).println("   |   |   \n" +
                                         "-----------\n" +
                                         "   | X |   \n" +
@@ -50,21 +50,4 @@ public class TicTacToeTest {
                                         "   |   |   ");
     }
 
-//    @Test
-//    public void shouldRedrawBoardWhenPlayer2EntersNumber() {
-//        game.getUserInput("X");
-//        game.getUserInput("O");
-//        verify(mockPrintStream).println("   | O |   \n" +
-//                                        "-----------\n" +
-//                                        "   | X |   \n" +
-//                                        "-----------\n" +
-//                                        "   |   |   ");
-//    }
-
-    @Test
-    public void shouldDisplayErrorMessageWhenPlayerTriesToPlayInTakenCell() {
-        TicTacToe takenCellGame = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5\n5\n4")));
-        takenCellGame.start();
-        verify(mockPrintStream).println("Location already taken");
-    }
 }
