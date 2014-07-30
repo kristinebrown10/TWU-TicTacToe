@@ -9,6 +9,7 @@ import java.io.StringReader;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -21,12 +22,13 @@ public class TicTacToeTest {
     public void setUp() throws Exception {
         mockPrintStream = mock(PrintStream.class);
         game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5")));
+        game.initializeBoard();
     }
 
     @Test
     public void shouldDrawBoardWhenProgramStarts() {
         game.start();
-        verify(mockPrintStream).println("   |   |   \n" +
+        verify(mockPrintStream, atLeast(1)).println("   |   |   \n" +
                                         "-----------\n" +
                                         "   |   |   \n" +
                                         "-----------\n" +
@@ -35,13 +37,25 @@ public class TicTacToeTest {
 
     @Test
     public void shouldGetUserInput() {
-        assertThat(game.getUserInput(), is(5));
+        assertThat(game.getUserInput("O"), is(5));
     }
 
     @Test
     public void shouldRedrawBoardWhenUserEntersNumber() {
-        game.getUserInput();
+        game.getUserInput("X");
         verify(mockPrintStream).println("   |   |   \n" +
+                                        "-----------\n" +
+                                        "   | X |   \n" +
+                                        "-----------\n" +
+                                        "   |   |   ");
+    }
+
+    @Test
+    public void shouldRedrawBoardWhenPlayer2EntersNumber() {
+        TicTacToe gameWithPlayer2 = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5\n2")));
+        gameWithPlayer2.start();
+        gameWithPlayer2.getUserInput("O");
+        verify(mockPrintStream).println("   | O |   \n" +
                                         "-----------\n" +
                                         "   | X |   \n" +
                                         "-----------\n" +
