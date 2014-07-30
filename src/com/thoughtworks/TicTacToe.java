@@ -12,15 +12,16 @@ public class TicTacToe {
     public TicTacToe(PrintStream out, BufferedReader reader) {
         this.out = out;
         this.reader = reader;
-        gameBoard = new Board(this.out);
+        gameBoard = new Board();
     }
 
     public void start() {
-        gameBoard.drawSelf();
-        getUserInput();
-        gameBoard.drawSelf();
-        getUserInput();
-        gameBoard.drawSelf();
+        drawBoard();
+        int counter = 0;
+        while (counter < 9) {
+            getUserInput();
+            counter++;
+        }
     }
 
     public int getUserInput() {
@@ -28,7 +29,7 @@ public class TicTacToe {
         try {
             String input = reader.readLine();
             inputNum = Integer.parseInt(input);
-            gameBoard.fillCell(inputNum);
+            out.println(gameBoard.fillCell(inputNum));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,6 +38,6 @@ public class TicTacToe {
     }
 
     public void drawBoard() {
-        gameBoard.drawSelf();
+        out.println(gameBoard.drawSelf());
     }
 }

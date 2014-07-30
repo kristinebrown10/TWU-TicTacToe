@@ -1,62 +1,67 @@
 package com.thoughtworks;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
-
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class BoardTest {
-    private PrintStream mockPrintStream;
     private Board board;
 
     @Before
     public void setUp() throws Exception {
-        mockPrintStream = mock(PrintStream.class);
-        board = new Board(mockPrintStream);
+        board = new Board();
     }
 
     @Test
     public void shouldDrawBoard() {
-        board.drawSelf();
-        verify(mockPrintStream, atLeast(1)).println("   |   |   \n" +
-                                                    "-----------\n" +
-                                                    "   |   |   \n" +
-                                                    "-----------\n" +
-                                                    "   |   |   ");
+        assertEquals(board.drawSelf(), "   |   |   \n" +
+                "-----------\n" +
+                "   |   |   \n" +
+                "-----------\n" +
+                "   |   |   ");
     }
 
     @Test
     public void shouldPlaceXWhenPlayer1Goes() {
-        board.fillCell(5);
-        board.drawSelf();
-        verify(mockPrintStream, atLeast(1)).println("   |   |   \n" +
-                                                    "-----------\n" +
-                                                    "   | X |   \n" +
-                                                    "-----------\n" +
-                                                    "   |   |   ");
+        assertEquals(board.fillCell(5), "   |   |   \n" +
+                                        "-----------\n" +
+                                        "   | X |   \n" +
+                                        "-----------\n" +
+                                        "   |   |   ");
     }
 
     @Test
     public void shouldRedrawBoardWhenPlayer2EntersNumber() {
         board.fillCell(5);
         board.fillCell(2);
-        board.drawSelf();
-        verify(mockPrintStream).println("   | O |   \n" +
-                "-----------\n" +
-                "   | X |   \n" +
-                "-----------\n" +
-                "   |   |   ");
+        assertEquals(board.drawSelf(), "   | O |   \n" +
+                                       "-----------\n" +
+                                       "   | X |   \n" +
+                                       "-----------\n" +
+                                       "   |   |   ");
     }
 
     @Test
     public void shouldDisplayErrorMessageWhenPlayerTriesToPlayInTakenCell() {
         board.fillCell(5);
-        board.fillCell(5);
-        verify(mockPrintStream).println("Location already taken");
+        assertEquals(board.fillCell(5), "Location already taken");
     }
 
+    @Test
+    public void shouldPrintDrawWhenAllCellsAreFilled() {
+        board.fillCell(1);
+        board.fillCell(2);
+        board.fillCell(3);
+        board.fillCell(4);
+        board.fillCell(5);
+        board.fillCell(6);
+        board.fillCell(7);
+        board.fillCell(8);
+        assertThat(board.fillCell(9), CoreMatchers.containsString("Game is a draw"));
+        assertThat(board.checkIfGameIsOver(), is(true));
+    }
 }

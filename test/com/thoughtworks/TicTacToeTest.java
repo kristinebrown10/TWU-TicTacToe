@@ -21,7 +21,7 @@ public class TicTacToeTest {
     @Before
     public void setUp() throws Exception {
         mockPrintStream = mock(PrintStream.class);
-        game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5\n2")));
+        game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5\n2\n1\n3\n7\n8\n4\n9\n6")));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class TicTacToeTest {
     @Test
     public void shouldRedrawBoardWhenUserEntersNumber() {
         game.getUserInput();
-        game.drawBoard();
+        //game.drawBoard();
         verify(mockPrintStream).println("   |   |   \n" +
                                         "-----------\n" +
                                         "   | X |   \n" +
@@ -50,4 +50,8 @@ public class TicTacToeTest {
                                         "   |   |   ");
     }
 
+//    @Test
+//    public void shouldStopGameWhenAllCellsAreFilled() {
+//        TicTacToe fullGame = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("1\n2\n3\n4\n5\n6\n7\n8\n9")));
+//    }
 }
