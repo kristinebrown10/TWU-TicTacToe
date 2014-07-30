@@ -8,10 +8,12 @@ public class TicTacToe {
     PrintStream out;
     BufferedReader reader;
     String[] board = new String[9];
+    Board gameBoard;
 
     public TicTacToe(PrintStream out, BufferedReader reader) {
         this.out = out;
         this.reader = reader;
+        gameBoard = new Board(this.out);
     }
 
     public void start() {
@@ -46,21 +48,17 @@ public class TicTacToe {
         }
         if(board[inputNum-1].equals(" ")) {
             board[inputNum - 1] = player;
+            gameBoard.fillCell(inputNum);
             drawBoard();
         }
         else {
             out.println("Location already taken");
             getUserInput(player);
         }
-
         return inputNum;
     }
 
     public void drawBoard() {
-        out.println(" " + board[0] + " | " + board[1] + " | " + board[2] + " \n" +
-                "-----------\n" +
-                " " + board[3] + " | " + board[4] + " | " + board[5] + " \n" +
-                "-----------\n" +
-                " " + board[6] + " | " + board[7] + " | " + board[8] + " ");
+        gameBoard.drawSelf();
     }
 }

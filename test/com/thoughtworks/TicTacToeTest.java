@@ -50,15 +50,16 @@ public class TicTacToeTest {
                                         "   |   |   ");
     }
 
-    @Test
-    public void shouldRedrawBoardWhenPlayer2EntersNumber() {
-        game.start();
-        verify(mockPrintStream).println("   | O |   \n" +
-                                        "-----------\n" +
-                                        "   | X |   \n" +
-                                        "-----------\n" +
-                                        "   |   |   ");
-    }
+//    @Test
+//    public void shouldRedrawBoardWhenPlayer2EntersNumber() {
+//        game.getUserInput("X");
+//        game.getUserInput("O");
+//        verify(mockPrintStream).println("   | O |   \n" +
+//                                        "-----------\n" +
+//                                        "   | X |   \n" +
+//                                        "-----------\n" +
+//                                        "   |   |   ");
+//    }
 
     @Test
     public void shouldDisplayErrorMessageWhenPlayerTriesToPlayInTakenCell() {
