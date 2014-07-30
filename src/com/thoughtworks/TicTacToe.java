@@ -16,7 +16,13 @@ public class TicTacToe {
 
     public void start() {
         initializeBoard();
-        getUserInput("X");
+        int playerNum = 1;
+        while(playerNum < 3) {
+            if(playerNum%2 == 1)
+                getUserInput("X");
+            else getUserInput("O");
+            playerNum++;
+        }
     }
 
     public void initializeBoard() {
