@@ -13,6 +13,11 @@ public class TicTacToe {
         this.reader = reader;
     }
 
+    public void start() {
+        drawBoard();
+        getUserInput();
+    }
+
     public void drawBoard() {
         out.println("   |   |   \n" +
                     "-----------\n" +

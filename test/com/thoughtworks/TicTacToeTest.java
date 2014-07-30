@@ -1,5 +1,6 @@
 package com.thoughtworks;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -13,10 +14,17 @@ import static org.mockito.Mockito.verify;
 
 public class TicTacToeTest {
 
+    private PrintStream mockPrintStream;
+    private TicTacToe game;
+
+    @Before
+    public void setUp() throws Exception {
+        mockPrintStream = mock(PrintStream.class);
+        game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5")));
+    }
+
     @Test
     public void shouldDrawBoardWhenProgramStarts() {
-        PrintStream mockPrintStream = mock(PrintStream.class);
-        TicTacToe game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5")));
         game.drawBoard();
         verify(mockPrintStream).println("   |   |   \n" +
                                         "-----------\n" +
@@ -27,8 +35,6 @@ public class TicTacToeTest {
 
     @Test
     public void shouldGetUserInput() {
-        PrintStream mockPrintStream = mock(PrintStream.class);
-        TicTacToe game = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("5")));
         assertThat(game.getUserInput(), is(5));
     }
 //    @Test
