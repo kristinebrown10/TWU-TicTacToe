@@ -67,11 +67,11 @@ public class BoardTest {
 
     @Test
     public void shouldDisplayMessageWhenPlayerGetsThreeInARow() {
+        board.fillCell(3);
         board.fillCell(4);
-        board.fillCell(9);
         board.fillCell(5);
-        board.fillCell(1);
-        assertEquals(board.fillCell(6), board.drawSelf() + "\nPlayer " + board.getCurrentPlayer() + " wins!");
-        assertEquals(board.checkIfGameIsWon(6), true);
+        board.fillCell(2);
+        assertEquals(board.fillCell(7), board.drawSelf() + "\nPlayer " + board.getCurrentPlayer() + " wins!");
+        assertEquals(board.checkIfGameIsWon(7), true);
     }
 }

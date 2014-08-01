@@ -26,7 +26,7 @@ public class Board {
             if(checkIfGameIsOver()) {
                 return (drawSelf() + "\nGame is a draw");
             }
-            else if(checkIfGameIsWon(playerMove-1)) {
+            else if(checkIfGameIsWon(playerMove)) {
                 return (drawSelf() + "\nPlayer " + getCurrentPlayer() + " wins!");
             }
             if(player.equals(Player.X)) player = Player.O;
@@ -50,19 +50,32 @@ public class Board {
 
     public boolean checkIfGameIsWon(int newMove) {
         boolean threeInARow = false;
+        newMove--;
         int vertical = 0;
         int horizontal = 0;
-        //Combos to win: 123, 456, 789, 147, 258, 369, 159, 357
-        //                 6    15  24  15    15    18  15   15
+        int diagonal1 = 0;
+        int diagonal2 = 0;
+
         for (int i = newMove%3; i < cells.length; i += 3) {
             if(cells[i].equals(player.toString())) vertical++;
         }
 
-        for (int i = newMove/3; i < cells.length; i++) {
+        for (int i = newMove/3; i < newMove/3 + 3; i++) {
             if(cells[i].equals(player.toString())) horizontal++;
         }
 
-        if (vertical == 3 || horizontal == 3) {
+        if(newMove%4 == 0) {
+            for(int i = 0; i < cells.length; i += 4) {
+                if(cells[i].equals(player.toString())) diagonal1++;
+            }
+        }
+        else if(newMove%2 == 0) {
+            for(int i = 2; i < cells.length-1; i += 2) {
+                if(cells[i].equals(player.toString())) diagonal2++;
+            }
+        }
+
+        if (vertical == 3 || horizontal == 3 || diagonal1 == 3 || diagonal2 == 3) {
             threeInARow = true;
         }
 
