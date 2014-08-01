@@ -60,7 +60,7 @@ public class Board {
             if(cells[i].equals(player.toString())) vertical++;
         }
 
-        for (int i = newMove/3; i < newMove/3 + 3; i++) {
+        for (int i = newMove/3+2; i < newMove/3 + 5; i++) {
             if(cells[i].equals(player.toString())) horizontal++;
         }
 

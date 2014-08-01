@@ -67,7 +67,7 @@ public class BoardTest {
 
     @Test
     public void shouldDisplayMessageWhenPlayerGetsThreeInARow() {
-        board.fillCell(3);
+        board.fillCell(7);
         board.fillCell(4);
         board.fillCell(5);
         board.fillCell(2);

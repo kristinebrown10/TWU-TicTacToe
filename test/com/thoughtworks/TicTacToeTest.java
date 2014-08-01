@@ -48,11 +48,4 @@ public class TicTacToeTest {
                                         "-----------\n" +
                                         "   |   |   ");
     }
-
-//    @Test
-//    public void shouldPrintMessageWhenAllCellsAreFilled() {
-//        TicTacToe fullGame = new TicTacToe(mockPrintStream, new BufferedReader(new StringReader("1\n2\n3\n4\n5\n6\n7\n8\n9")));
-//        fullGame.start();
-//        verify(mockPrintStream).println("Game is a draw");
-//    }
 }
