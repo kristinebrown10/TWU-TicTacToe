@@ -3,7 +3,6 @@ package com.thoughtworks;
 public class Board {
     private String[] cells = new String[9];
     private boolean xTurn;
-    private int currentPlayer;
 
     public Board() {
         for(int i = 0; i < 9; i++) {
@@ -27,10 +26,13 @@ public class Board {
             } else {
                 cells[playerMove - 1] = "O";
             }
-            xTurn = !xTurn;
             if(checkIfGameIsOver()) {
                 return (drawSelf() + "\nGame is a draw");
             }
+            else if(checkIfGameIsWon(playerMove-1)) {
+                return (drawSelf() + "\nPlayer " + getCurrentPlayer() + " wins!");
+            }
+            xTurn = !xTurn;
         }
         else {
             return ("Location already taken");
@@ -48,8 +50,23 @@ public class Board {
         return gameOver;
     }
 
-    public boolean checkIfGameIsWon() {
+    public boolean checkIfGameIsWon(int newMove) {
         boolean threeInARow = false;
+        int vertical = 0;
+        int horizontal = 0;
+        //Combos to win: 123, 456, 789, 147, 258, 369, 159, 357
+        //                 6    15  24  15    15    18  15   15
+        for (int i = newMove%3; i < cells.length; i += 3) {
+            if(cells[i].equals("X")) vertical++;
+        }
+
+        for (int i = newMove/3; i < cells.length; i++) {
+            if(cells[i].equals("X")) horizontal++;
+        }
+
+        if (vertical == 3 || horizontal == 3) {
+            threeInARow = true;
+        }
 
         return threeInARow;
     }

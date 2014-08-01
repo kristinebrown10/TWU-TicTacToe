@@ -17,10 +17,8 @@ public class TicTacToe {
 
     public void start() {
         drawBoard();
-        int counter = 0;
-        while (counter < 9) {
+        while (!gameBoard.checkIfGameIsOver()) {
             getUserInput();
-            counter++;
         }
     }
 
