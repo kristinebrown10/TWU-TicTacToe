@@ -8,31 +8,21 @@ public class TicTacToe {
     PrintStream out;
     BufferedReader reader;
     Board gameBoard;
+    InputHandler inputHandler;
 
     public TicTacToe(PrintStream out, BufferedReader reader) {
         this.out = out;
         this.reader = reader;
+        inputHandler = new InputHandler(out, reader);
         gameBoard = new Board();
     }
 
     public void start() {
         drawBoard();
         while (!gameBoard.checkIfGameIsOver()) {
-            getUserInput();
-        }
-    }
-
-    public int getUserInput() {
-        int inputNum = 0;
-        try {
-            String input = reader.readLine();
-            inputNum = Integer.parseInt(input);
+            int inputNum = inputHandler.getUserInput();
             out.println(gameBoard.fillCell(inputNum));
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return inputNum;
     }
 
     public void drawBoard() {

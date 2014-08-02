@@ -35,10 +35,9 @@ public class BoardTest {
     @Test
     public void shouldRedrawBoardWhenPlayer2EntersNumber() {
         board.fillCell(5);
-        board.fillCell(2);
         String[] cells = {" ","O"," "," ","X"," "," "," "," "};
         Board myBoard = new Board(cells);
-        assertEquals(board.drawSelf(), myBoard.drawSelf());
+        assertEquals(board.fillCell(2), myBoard.drawSelf());
     }
 
     @Test

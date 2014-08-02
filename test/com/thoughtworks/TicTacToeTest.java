@@ -35,13 +35,8 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void shouldGetUserInput() {
-        assertThat(game.getUserInput(), is(5));
-    }
-
-    @Test
     public void shouldRedrawBoardWhenUserEntersNumber() {
-        game.getUserInput();
+        game.start();
         verify(mockPrintStream).println("   |   |   \n" +
                                         "-----------\n" +
                                         "   | X |   \n" +
