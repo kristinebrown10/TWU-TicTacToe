@@ -49,10 +49,10 @@ public class BoardTest {
 
     @Test
     public void shouldPrintDrawWhenAllCellsAreFilled() {
-        String[] cells = {"X","O","X","O","X","O","X","O"," "};
+        String[] cells = {"X","O","X","X","O","O","O","X"," "};
         Board myBoard = new Board(cells);
         assertThat(myBoard.fillCell(9), CoreMatchers.containsString("Game is a draw"));
-        assertThat(myBoard.checkIfGameIsOver(), is(true));
+        assertThat(myBoard.gameIsOver(), is(true));
     }
 
     @Test
@@ -60,6 +60,6 @@ public class BoardTest {
         String[] cells = {" ","O","X","O","X"," "," "," "," "};
         Board myBoard = new Board(cells);
         assertEquals(myBoard.fillCell(7), myBoard.drawSelf() + "\nPlayer " + myBoard.getCurrentPlayer() + " wins!");
-        assertEquals(myBoard.checkIfGameIsWon(7), true);
+        assertEquals(myBoard.gameIsWon(7), true);
     }
 }

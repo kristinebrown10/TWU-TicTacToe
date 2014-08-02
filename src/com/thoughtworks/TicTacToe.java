@@ -1,7 +1,6 @@
 package com.thoughtworks;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintStream;
 
 public class TicTacToe {
@@ -19,7 +18,7 @@ public class TicTacToe {
 
     public void start() {
         drawBoard();
-        while (!gameBoard.checkIfGameIsOver()) {
+        while (!gameBoard.gameIsOver()) {
             int inputNum = inputHandler.getUserInput();
             out.println(gameBoard.fillCell(inputNum));
         }

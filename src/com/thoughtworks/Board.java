@@ -19,23 +19,22 @@ public class Board {
 
     public String drawSelf() {
         return(" " + cells[0] + " | " + cells[1] + " | " + cells[2] + " \n" +
-                "-----------\n" +
-                " " + cells[3] + " | " + cells[4] + " | " + cells[5] + " \n" +
-                "-----------\n" +
-                " " + cells[6] + " | " + cells[7] + " | " + cells[8] + " ");
+               "-----------\n" +
+               " " + cells[3] + " | " + cells[4] + " | " + cells[5] + " \n" +
+               "-----------\n" +
+               " " + cells[6] + " | " + cells[7] + " | " + cells[8] + " ");
     }
 
     public String fillCell(int playerMove) {
-        if(cellIsEmpty(playerMove)) {
-            cells[playerMove - 1] = player.toString();
-            if(checkIfGameIsOver()) {
+        int cellNum = playerMove - 1;
+        if(cellIsEmpty(cellNum)) {
+            cells[cellNum] = player.toString();
+            if(gameIsWon(playerMove)) {
+                return (drawSelf() + "\nPlayer " + getCurrentPlayer() + " wins!");
+            } else if(gameIsOver()) {
                 return (drawSelf() + "\nGame is a draw");
             }
-            else if(checkIfGameIsWon(playerMove)) {
-                return (drawSelf() + "\nPlayer " + getCurrentPlayer() + " wins!");
-            }
-            if(player.equals(Player.X)) player = Player.O;
-            else player = Player.X;
+            swapPlayer();
         }
         else {
             return ("Location already taken");
@@ -43,11 +42,16 @@ public class Board {
         return drawSelf();
     }
 
-    private boolean cellIsEmpty(int playerMove) {
-        return cells[playerMove-1].equals(" ");
+    private void swapPlayer() {
+        if(player.equals(Player.X)) player = Player.O;
+        else player = Player.X;
     }
 
-    public boolean checkIfGameIsOver() {
+    private boolean cellIsEmpty(int cellNum) {
+        return cells[cellNum].equals(" ");
+    }
+
+    public boolean gameIsOver() {
         boolean gameOver = true;
         for(String cell : cells) {
             if(cell.equals(" ")) {
@@ -57,38 +61,56 @@ public class Board {
         return gameOver;
     }
 
-    public boolean checkIfGameIsWon(int newMove) {
+    public boolean gameIsWon(int newMove) {
         boolean threeInARow = false;
         newMove--;
-        int vertical = 0;
-        int horizontal = 0;
-        int diagonal1 = 0;
-        int diagonal2 = 0;
 
-        for (int i = newMove%3; i < cells.length; i += 3) {
-            if(cells[i].equals(player.toString())) vertical++;
+        if (threeInARowDown(newMove) || threeInARowAcross(newMove) ||
+                threeInARowForwardDiagonal(newMove) || threeInARowBackwardDiagonal(newMove)) {
+            return true;
         }
 
+        return false;
+    }
+
+    private boolean threeInARowBackwardDiagonal(int newMove) {
+        int diagonal2 = 0;
+        if(newMove%4 != 0 && newMove%2 == 0) {
+            for (int i = 2; i < cells.length - 1; i += 2) {
+                if (cells[i].equals(player.toString())) diagonal2++;
+            }
+        }
+        if(diagonal2 == 3) return true;
+        return false;
+    }
+
+    private boolean threeInARowForwardDiagonal(int newMove) {
+        int diagonal1 = 0;
+        if(newMove%4 == 0) {
+            for (int i = 0; i < cells.length; i += 4) {
+                if (cells[i].equals(player.toString())) diagonal1++;
+            }
+        }
+        if(diagonal1 == 3) return true;
+        return false;
+    }
+
+    private boolean threeInARowAcross(int newMove) {
+        int horizontal = 0;
         for (int i = newMove/3+2; i < newMove/3 + 5; i++) {
             if(cells[i].equals(player.toString())) horizontal++;
         }
+        if(horizontal == 3) return true;
+        return false;
+    }
 
-        if(newMove%4 == 0) {
-            for(int i = 0; i < cells.length; i += 4) {
-                if(cells[i].equals(player.toString())) diagonal1++;
-            }
+    private boolean threeInARowDown(int newMove) {
+        int vertical = 0;
+        for (int i = newMove%3; i < cells.length; i += 3) {
+            if(cells[i].equals(player.toString())) vertical++;
         }
-        else if(newMove%2 == 0) {
-            for(int i = 2; i < cells.length-1; i += 2) {
-                if(cells[i].equals(player.toString())) diagonal2++;
-            }
-        }
-
-        if (vertical == 3 || horizontal == 3 || diagonal1 == 3 || diagonal2 == 3) {
-            threeInARow = true;
-        }
-
-        return threeInARow;
+        if(vertical == 3) return true;
+        return false;
     }
 
     public int getCurrentPlayer() {
