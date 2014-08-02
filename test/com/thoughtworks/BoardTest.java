@@ -27,51 +27,40 @@ public class BoardTest {
 
     @Test
     public void shouldPlaceXWhenPlayer1Goes() {
-        assertEquals(board.fillCell(5), "   |   |   \n" +
-                                        "-----------\n" +
-                                        "   | X |   \n" +
-                                        "-----------\n" +
-                                        "   |   |   ");
+        String[] cells = {" "," "," "," ","X"," "," "," "," "};
+        Board myBoard = new Board(cells);
+        assertEquals(board.fillCell(5), myBoard.drawSelf());
     }
 
     @Test
     public void shouldRedrawBoardWhenPlayer2EntersNumber() {
         board.fillCell(5);
         board.fillCell(2);
-        assertEquals(board.drawSelf(), "   | O |   \n" +
-                                       "-----------\n" +
-                                       "   | X |   \n" +
-                                       "-----------\n" +
-                                       "   |   |   ");
+        String[] cells = {" ","O"," "," ","X"," "," "," "," "};
+        Board myBoard = new Board(cells);
+        assertEquals(board.drawSelf(), myBoard.drawSelf());
     }
 
     @Test
     public void shouldReturnErrorMessageWhenPlayerTriesToPlayInTakenCell() {
-        board.fillCell(5);
-        assertEquals(board.fillCell(5), "Location already taken");
+        String[] cells = {" "," "," "," ","X"," "," "," "," "};
+        Board myBoard = new Board(cells);
+        assertEquals(myBoard.fillCell(5), "Location already taken");
     }
 
     @Test
     public void shouldPrintDrawWhenAllCellsAreFilled() {
-        board.fillCell(1);
-        board.fillCell(2);
-        board.fillCell(3);
-        board.fillCell(4);
-        board.fillCell(5);
-        board.fillCell(6);
-        board.fillCell(7);
-        board.fillCell(8);
-        assertThat(board.fillCell(9), CoreMatchers.containsString("Game is a draw"));
-        assertThat(board.checkIfGameIsOver(), is(true));
+        String[] cells = {"X","O","X","O","X","O","X","O"," "};
+        Board myBoard = new Board(cells);
+        assertThat(myBoard.fillCell(9), CoreMatchers.containsString("Game is a draw"));
+        assertThat(myBoard.checkIfGameIsOver(), is(true));
     }
 
     @Test
     public void shouldDisplayMessageWhenPlayerGetsThreeInARow() {
-        board.fillCell(7);
-        board.fillCell(4);
-        board.fillCell(5);
-        board.fillCell(2);
-        assertEquals(board.fillCell(7), board.drawSelf() + "\nPlayer " + board.getCurrentPlayer() + " wins!");
-        assertEquals(board.checkIfGameIsWon(7), true);
+        String[] cells = {" ","O","X","O","X"," "," "," "," "};
+        Board myBoard = new Board(cells);
+        assertEquals(myBoard.fillCell(7), myBoard.drawSelf() + "\nPlayer " + myBoard.getCurrentPlayer() + " wins!");
+        assertEquals(myBoard.checkIfGameIsWon(7), true);
     }
 }

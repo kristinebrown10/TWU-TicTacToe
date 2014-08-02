@@ -12,6 +12,11 @@ public class Board {
         player = Player.X;
     }
 
+    public Board(String[] cells) {
+       this.cells = cells;
+       player = Player.X;
+    }
+
     public String drawSelf() {
         return(" " + cells[0] + " | " + cells[1] + " | " + cells[2] + " \n" +
                 "-----------\n" +
@@ -21,7 +26,7 @@ public class Board {
     }
 
     public String fillCell(int playerMove) {
-        if(cells[playerMove-1].equals(" ")) {
+        if(cellIsEmpty(playerMove)) {
             cells[playerMove - 1] = player.toString();
             if(checkIfGameIsOver()) {
                 return (drawSelf() + "\nGame is a draw");
@@ -36,6 +41,10 @@ public class Board {
             return ("Location already taken");
         }
         return drawSelf();
+    }
+
+    private boolean cellIsEmpty(int playerMove) {
+        return cells[playerMove-1].equals(" ");
     }
 
     public boolean checkIfGameIsOver() {
