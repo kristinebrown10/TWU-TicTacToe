@@ -52,7 +52,7 @@ public class BoardTest {
         String[] cells = {"X","O","X","X","O","O","O","X"," "};
         Board myBoard = new Board(cells);
         assertThat(myBoard.fillCell(9), CoreMatchers.containsString("Game is a draw"));
-        assertThat(myBoard.gameIsOver(), is(true));
+        assertThat(myBoard.gameIsADraw(), is(true));
     }
 
     @Test

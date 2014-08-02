@@ -18,8 +18,10 @@ public class TicTacToe {
 
     public void start() {
         drawBoard();
-        while (!gameBoard.gameIsOver()) {
-            int inputNum = inputHandler.getUserInput();
+        int inputNum = inputHandler.getUserInput();
+        out.println(gameBoard.fillCell(inputNum));
+        while (!gameBoard.gameIsOver(inputNum)) {
+            inputNum = inputHandler.getUserInput();
             out.println(gameBoard.fillCell(inputNum));
         }
     }
