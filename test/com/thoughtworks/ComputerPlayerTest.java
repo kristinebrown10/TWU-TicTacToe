@@ -23,10 +23,17 @@ public class ComputerPlayerTest {
 
     }
 
+//    @Test
+//    public void testGetPlayerInput(){
+//        String[] cells = {"X","O","X","X"," ","O"," "," "," "};
+//        computerPlayer = new ComputerPlayer(mockPrintStream,mockBufferedReader,"X", cells);
+//        assertEquals(computerPlayer.getPlayerInput(), 5);
+//    }
+
     @Test
-    public void testGetPlayerInput(){
-        String[] cells = {"X","O","X","X"," ","O"," "," "," "};
+    public void shouldChooseEmptyLocationThatWillWinTheGame() {
+        String[] cells = {"X","O","X"," ","O"," "," "," ","X"};
         computerPlayer = new ComputerPlayer(mockPrintStream,mockBufferedReader,"X", cells);
-        assertEquals(computerPlayer.getPlayerInput(), 5);
+        assertEquals(computerPlayer.getPlayerInput(), 8);
     }
 }
