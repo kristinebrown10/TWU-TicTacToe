@@ -2,8 +2,9 @@ package com.thoughtworks;
 
 public class Board {
     private String[] cells = new String[9];
-    private enum Player {X,O}
+    public enum Player {X,O}
     private Player player;
+    GameAI gameAI;
 
     public Board() {
         for(int i = 0; i < 9; i++) {
@@ -58,49 +59,14 @@ public class Board {
 
     public boolean gameIsWon(int newMove) {
         newMove--;
-        return (threeInARowDown(newMove) || threeInARowAcross(newMove) ||
-                threeInARowForwardDiagonal(newMove) || threeInARowBackwardDiagonal(newMove));
+        gameAI = new GameAI(cells, player);
+        return (gameAI.threeInARowDown(newMove) || gameAI.threeInARowAcross(newMove) ||
+                gameAI.threeInARowForwardDiagonal() || gameAI.threeInARowBackwardDiagonal());
     }
 
     public int getCurrentPlayer() {
         if(player.equals(Player.X)) return 1;
         return 2;
-    }
-
-    private boolean threeInARowBackwardDiagonal(int newMove) {
-        int diagonal2 = 0;
-        if(newMove%4 != 0 && newMove%2 == 0) {
-            for (int i = 2; i < cells.length - 1; i += 2) {
-                if (cells[i].equals(player.toString())) diagonal2++;
-            }
-        }
-        return (diagonal2 == 3);
-    }
-
-    private boolean threeInARowForwardDiagonal(int newMove) {
-        int diagonal1 = 0;
-        if(newMove%4 == 0) {
-            for (int i = 0; i < cells.length; i += 4) {
-                if (cells[i].equals(player.toString())) diagonal1++;
-            }
-        }
-        return (diagonal1 == 3);
-    }
-
-    private boolean threeInARowAcross(int newMove) {
-        int horizontal = 0;
-        for (int i = newMove/3+2; i < newMove/3 + 5; i++) {
-            if(cells[i].equals(player.toString())) horizontal++;
-        }
-        return (horizontal == 3);
-    }
-
-    private boolean threeInARowDown(int newMove) {
-        int vertical = 0;
-        for (int i = newMove%3; i < cells.length; i += 3) {
-            if(cells[i].equals(player.toString())) vertical++;
-        }
-        return (vertical == 3);
     }
 
     private void swapPlayer() {

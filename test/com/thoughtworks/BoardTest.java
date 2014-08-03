@@ -57,7 +57,7 @@ public class BoardTest {
 
     @Test
     public void shouldDisplayMessageWhenPlayerGetsThreeInARow() {
-        String[] cells = {" ","O","X","O","X"," "," "," "," "};
+        String[] cells = {"O","O","X","X","X"," "," ","O"," "};
         Board myBoard = new Board(cells);
         assertEquals(myBoard.fillCell(7), myBoard.drawSelf() + "\nPlayer " + myBoard.getCurrentPlayer() + " wins!");
         assertEquals(myBoard.gameIsWon(7), true);
