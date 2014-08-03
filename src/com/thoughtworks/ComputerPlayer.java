@@ -26,7 +26,12 @@ public class ComputerPlayer extends Player {
                    return (i+1);
            }
        }
-       return 0;
+       for(int i = 0; i < cells.length; i++) {
+            if(cells[i].equals(" ")) {
+                return (i+1);
+            }
+       }
+        return -1;
     }
 
 
