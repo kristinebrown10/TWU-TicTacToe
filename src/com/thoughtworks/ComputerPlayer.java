@@ -8,9 +8,11 @@ public class ComputerPlayer extends Player {
     private String[] cells = new String[9];
     String[] temp;
     ThreeInARowChecker checker;
+    String playerState;
 
     public ComputerPlayer(PrintStream out, BufferedReader reader, String playerState, String[] cells) {
         super(out, reader, playerState, cells);
+        this.playerState = playerState;
         this.cells = cells;
     }
 
@@ -19,11 +21,12 @@ public class ComputerPlayer extends Player {
        for(int i = 0; i < cells.length; i++) {
            if(cells[i].equals(" ")) {
                temp = cells;
-               temp[i] = super.toString();
-               checker = new ThreeInARowChecker(cells, super.toString());
-               if(checker.threeInARowAcross(i+1) || checker.threeInARowDown(i+1)
+               temp[i] = playerState;
+               checker = new ThreeInARowChecker(temp, playerState);
+               if(checker.threeInARowAcross(i) || checker.threeInARowDown(i)
                        || checker.threeInARowBackwardDiagonal() || checker.threeInARowForwardDiagonal())
                    return (i+1);
+               else temp[i] = " ";
            }
        }
        for(int i = 0; i < cells.length; i++) {

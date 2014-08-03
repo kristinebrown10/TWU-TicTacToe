@@ -26,7 +26,7 @@ public class ComputerPlayerTest {
     @Test
     public void shouldChooseEmptyLocationThatWillWinTheGame() {
         String[] cells = {"X","O","X"," ","O"," "," "," ","X"};
-        computerPlayer = new ComputerPlayer(mockPrintStream,mockBufferedReader,"X", cells);
+        computerPlayer = new ComputerPlayer(mockPrintStream,mockBufferedReader,"O", cells);
         assertEquals(computerPlayer.getPlayerInput(), 8);
     }
 
