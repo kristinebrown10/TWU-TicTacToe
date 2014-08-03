@@ -18,15 +18,16 @@ public class BoardTest {
     private Player playerX;
     private Player playerO;
     private PrintStream mockPrintStream;
-    private BufferedReader mockBufferedReader;
+    private BufferedReader mockBufferedReaderX;
     private BufferedReader mockBufferedReaderO;
 
     @Before
     public void setUp() throws Exception {
         board = new Board();
-        new BufferedReader(new StringReader("5"));
-        new BufferedReader(new StringReader("2"));
-        playerX = new Player(mockPrintStream, mockBufferedReader, "X");
+        mockPrintStream = mock(PrintStream.class);
+        mockBufferedReaderX = new BufferedReader(new StringReader("5"));
+        mockBufferedReaderO = new BufferedReader(new StringReader("2"));
+        playerX = new Player(mockPrintStream, mockBufferedReaderX, "X");
         playerO = new Player(mockPrintStream, mockBufferedReaderO, "O");
     }
 

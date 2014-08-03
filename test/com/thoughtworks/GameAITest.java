@@ -9,9 +9,9 @@ public class GameAITest {
 
     @Test
     public void testThreeInARowAcross(){
-        String[] cells = {"O","O","O"," ","X","X","X","O","X"};
+        String[] cells = {"O","O","O"," ","X"," ","X","O","X"};
         gameAI = new GameAI(cells, "O");
-        assertEquals(gameAI.threeInARowAcross(3),true);
+        assertEquals(gameAI.threeInARowAcross(2),true);
     }
 
     @Test
