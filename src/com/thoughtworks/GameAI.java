@@ -11,7 +11,8 @@ public class GameAI {
 
     public boolean threeInARowAcross(int newMove) {
         int horizontal = 0;
-        for (int i = newMove/3+2; i < newMove/3 + 5; i++) {
+        newMove = newMove/3;
+        for (int i = newMove*3; i < newMove*3 + 3; i++) {
             if(cells[i].equals(player)) horizontal++;
         }
         return (horizontal == 3);
