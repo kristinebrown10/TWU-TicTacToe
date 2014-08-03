@@ -21,7 +21,8 @@ public class PlayerTest {
     public void setUp() throws Exception{
         mockPrintStream = mock(PrintStream.class);
         mockBufferedReader = new BufferedReader(new StringReader("5"));
-        player = new Player(mockPrintStream,mockBufferedReader,"X");
+        String[] cells = {" "," "," "," "," "," "," "," "," "};
+        player = new Player(mockPrintStream,mockBufferedReader,"X",cells);
     }
 
     @Test

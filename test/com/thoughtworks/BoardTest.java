@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-import java.io.StringReader;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -24,8 +23,9 @@ public class BoardTest {
         PrintStream mockPrintStream = mock(PrintStream.class);
         BufferedReader mockBufferedReaderX = mock(BufferedReader.class);
         BufferedReader mockBufferedReaderO = mock(BufferedReader.class);
-        playerX = new Player(mockPrintStream, mockBufferedReaderX, "X");
-        playerO = new Player(mockPrintStream, mockBufferedReaderO, "O");
+        String[] cells = {" "," "," "," "," "," "," "," "," "};
+        playerX = new Player(mockPrintStream, mockBufferedReaderX, "X", cells);
+        playerO = new Player(mockPrintStream, mockBufferedReaderO, "O", cells);
     }
 
     @Test

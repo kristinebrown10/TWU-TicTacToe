@@ -17,9 +17,9 @@ public class TicTacToe {
         this.reader = reader;
         inputHandler = new InputHandler(out, reader);
         gameBoard = new Board();
-        playerX = new Player(out, reader, "X");
-        playerO = new ComputerPlayer(out, reader, "O");
+        playerX = new Player(out, reader, "X", gameBoard.passBoard());
         currentPlayer = playerX;
+        playerO = new ComputerPlayer(out, reader, "O", gameBoard.passBoard());
     }
 
     public void start() {
@@ -27,6 +27,7 @@ public class TicTacToe {
         int inputNum = playerX.getPlayerInput();
         out.println(gameBoard.fillCell(inputNum, currentPlayer));
         while (!gameBoard.gameIsOver(inputNum, currentPlayer)) {
+            currentPlayer.lookAtBoard(gameBoard.passBoard());
             swapPlayer();
             inputNum = currentPlayer.getPlayerInput();
             out.println(gameBoard.fillCell(inputNum, currentPlayer));

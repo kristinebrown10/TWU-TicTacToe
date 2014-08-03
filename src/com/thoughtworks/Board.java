@@ -62,4 +62,8 @@ public class Board {
     private boolean cellIsEmpty(int cellNum) {
         return cells[cellNum].equals(" ");
     }
+
+    public String[] passBoard() {
+        return cells;
+    }
 }
