@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.io.StringReader;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -26,10 +27,10 @@ public class TicTacToeTest {
     public void shouldDrawBoardWhenProgramStarts() {
         game.start();
         verify(mockPrintStream, atLeast(1)).println("   |   |   \n" +
-                                                    "-----------\n" +
-                                                    "   |   |   \n" +
-                                                    "-----------\n" +
-                                                    "   |   |   ");
+                "-----------\n" +
+                "   |   |   \n" +
+                "-----------\n" +
+                "   |   |   ");
     }
 
     @Test
@@ -40,5 +41,16 @@ public class TicTacToeTest {
                                         "   | X |   \n" +
                                         "-----------\n" +
                                         "   |   |   ");
+    }
+
+    @Test
+    public void shouldReturnCurrentPlayer() {
+        assertEquals(game.getCurrentPlayer(), "X");
+    }
+
+    @Test
+    public void shouldReturnPlayerOWhenSwapPlayerIsCalled() {
+        game.swapPlayer();
+        assertEquals(game.getCurrentPlayer(), "O");
     }
 }

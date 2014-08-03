@@ -2,20 +2,16 @@ package com.thoughtworks;
 
 public class Board {
     private String[] cells = new String[9];
-    public enum Player {X,O}
-    private Player player;
     GameAI gameAI;
 
     public Board() {
         for(int i = 0; i < 9; i++) {
             cells[i] = " ";
         }
-        player = Player.X;
     }
 
     public Board(String[] cells) {
        this.cells = cells;
-       player = Player.X;
     }
 
     public String drawSelf() {
@@ -26,16 +22,15 @@ public class Board {
                " " + cells[6] + " | " + cells[7] + " | " + cells[8] + " ");
     }
 
-    public String fillCell(int playerMove) {
+    public String fillCell(int playerMove, Player currentPlayer) {
         int cellNum = playerMove - 1;
         if(cellIsEmpty(cellNum)) {
-            cells[cellNum] = player.toString();
-            if(gameIsWon(playerMove)) {
-                return (drawSelf() + "\nPlayer " + getCurrentPlayer() + " wins!");
+            cells[cellNum] = currentPlayer.toString();
+            if(gameIsWon(playerMove, currentPlayer)) {
+                return (drawSelf() + "\nPlayer " + currentPlayer.getPlayerNum() + " wins!");
             } else if(gameIsADraw()) {
                 return (drawSelf() + "\nGame is a draw");
             }
-            swapPlayer();
         }
         else {
             return ("Location already taken");
@@ -43,8 +38,8 @@ public class Board {
         return drawSelf();
     }
 
-    public boolean gameIsOver(int inputNum) {
-        return gameIsADraw() || gameIsWon(inputNum);
+    public boolean gameIsOver(int inputNum, Player currentPlayer) {
+        return gameIsADraw() || gameIsWon(inputNum, currentPlayer);
     }
 
     public boolean gameIsADraw() {
@@ -57,21 +52,11 @@ public class Board {
         return gameIsADraw;
     }
 
-    public boolean gameIsWon(int newMove) {
+    public boolean gameIsWon(int newMove, Player currentPlayer) {
         newMove--;
-        gameAI = new GameAI(cells, player);
+        gameAI = new GameAI(cells, currentPlayer.toString());
         return (gameAI.threeInARowDown(newMove) || gameAI.threeInARowAcross(newMove) ||
                 gameAI.threeInARowForwardDiagonal() || gameAI.threeInARowBackwardDiagonal());
-    }
-
-    public int getCurrentPlayer() {
-        if(player.equals(Player.X)) return 1;
-        return 2;
-    }
-
-    private void swapPlayer() {
-        if(player.equals(Player.X)) player = Player.O;
-        else player = Player.X;
     }
 
     private boolean cellIsEmpty(int cellNum) {
