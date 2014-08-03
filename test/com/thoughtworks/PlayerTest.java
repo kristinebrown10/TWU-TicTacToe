@@ -33,4 +33,14 @@ public class PlayerTest {
     public void shouldReturnPlayerStateAsString() {
         assertThat(player.toString(),is("X"));
     }
+
+    @Test
+    public void shouldReturnTrueWhenPlayerIsX() {
+        assertThat(player.playerIsX(), is(true));
+    }
+
+    @Test
+    public void shouldReturn1WhenPlayerIsX() {
+        assertThat(player.getPlayerNum(), is(1));
+    }
 }

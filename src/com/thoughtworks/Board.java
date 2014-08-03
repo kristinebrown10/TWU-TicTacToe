@@ -2,7 +2,7 @@ package com.thoughtworks;
 
 public class Board {
     private String[] cells = new String[9];
-    GameAI gameAI;
+    ThreeInARowChecker threeInARowChecker;
 
     public Board() {
         for(int i = 0; i < 9; i++) {
@@ -54,9 +54,9 @@ public class Board {
 
     public boolean gameIsWon(int newMove, Player currentPlayer) {
         newMove--;
-        gameAI = new GameAI(cells, currentPlayer.toString());
-        return (gameAI.threeInARowDown(newMove) || gameAI.threeInARowAcross(newMove) ||
-                gameAI.threeInARowForwardDiagonal() || gameAI.threeInARowBackwardDiagonal());
+        threeInARowChecker = new ThreeInARowChecker(cells, currentPlayer.toString());
+        return (threeInARowChecker.threeInARowDown(newMove) || threeInARowChecker.threeInARowAcross(newMove) ||
+                threeInARowChecker.threeInARowForwardDiagonal() || threeInARowChecker.threeInARowBackwardDiagonal());
     }
 
     private boolean cellIsEmpty(int cellNum) {

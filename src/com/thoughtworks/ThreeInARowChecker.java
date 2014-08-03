@@ -1,10 +1,10 @@
 package com.thoughtworks;
 
-public class GameAI {
+public class ThreeInARowChecker {
     public String cells[];
     private String player;
 
-    public GameAI(String cells[], String player) {
+    public ThreeInARowChecker(String cells[], String player) {
         this.cells = cells;
         this.player = player;
     }

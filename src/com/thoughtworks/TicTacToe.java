@@ -18,7 +18,7 @@ public class TicTacToe {
         inputHandler = new InputHandler(out, reader);
         gameBoard = new Board();
         playerX = new Player(out, reader, "X");
-        playerO = new Player(out, reader, "O");
+        playerO = new ComputerPlayer(out, reader, "O");
         currentPlayer = playerX;
     }
 
@@ -28,7 +28,7 @@ public class TicTacToe {
         out.println(gameBoard.fillCell(inputNum, currentPlayer));
         while (!gameBoard.gameIsOver(inputNum, currentPlayer)) {
             swapPlayer();
-            inputNum = inputHandler.getUserInput();
+            inputNum = currentPlayer.getPlayerInput();
             out.println(gameBoard.fillCell(inputNum, currentPlayer));
         }
     }
